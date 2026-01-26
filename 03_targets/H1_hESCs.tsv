@@ -1,0 +1,5 @@
+experiment_name	collection_name	n_promoters	n_promoters_0_5	n_promoters_0_95	n_ctcf	n_ctcf_0_5	n_ctcf_0_95
+ATAC_hESC_C	H1_hESCs	3021	2109	1673	4806	532	328
+ATAC_hESC_A	H1_hESCs	3003	1084	709	4953	240	140
+ATAC_hESC_D	H1_hESCs	3015	1842	1334	4827	464	283
+ATAC_hESC_B	H1_hESCs	3009	1359	887	4968	303	181

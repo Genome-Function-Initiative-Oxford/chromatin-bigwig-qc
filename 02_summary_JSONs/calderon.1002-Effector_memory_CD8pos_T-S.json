@@ -1,0 +1,17 @@
+{
+    "mean_peak_score": 0.38257756336157644,
+    "median_peak_length": 0.0014947051,
+    "mean_shape_score": 0.30624641355225324,
+    "mean_peak_length": 621.5903385498323,
+    "mean_enrichment_score": 0.5192120225682659,
+    "median_enrichment_score": 0.37450114,
+    "lower_quartile_enrichment_score": 0.058079194,
+    "upper_quartile_enrichment_score": 0.99999994,
+    "percentage_coverage": 0.4118713318588213,
+    "percentage_coverage_0_5": 0.3721382922681332,
+    "percentage_coverage_0_95": 0.35911623661199543,
+    "n_peaks": 105243,
+    "n_peaks_0_5": 40499,
+    "n_peaks_0_95": 33980,
+    "total_bigwig_sum": 147809285
+}

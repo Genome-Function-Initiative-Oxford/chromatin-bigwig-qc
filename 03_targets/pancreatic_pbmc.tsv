@@ -1,0 +1,13 @@
+experiment_name	collection_name	n_promoters	n_promoters_0_5	n_promoters_0_95	n_ctcf	n_ctcf_0_5	n_ctcf_0_95
+pancreatic_islets_IIDP-AFC2208-2	pancreatic_pbmc	3032	2648	2380	3656	1064	764
+pbmc_HemaCare-D182364	pancreatic_pbmc	2554	1798	833	3825	687	233
+pbmc_HemaCare-D105	pancreatic_pbmc	2411	1888	867	3728	1034	346
+pancreas_nPOD-6282	pancreatic_pbmc	3018	2949	2886	4254	1495	1083
+pancreas_nPOD-6251-2	pancreatic_pbmc	3029	2987	2942	4134	1792	1319
+pancreas_nPOD-6007	pancreatic_pbmc	3026	2950	2896	3813	1389	1053
+pancreas_nPOD-6251-1	pancreatic_pbmc	3032	2979	2932	4394	1853	1349
+pbmc_HemaCare-D147558	pancreatic_pbmc	2707	2169	1059	4144	1117	384
+pancreatic_islets_IIDP-AEHU156	pancreatic_pbmc	3041	2990	2957	3942	2067	1737
+pbmc_HemaCare-D205220	pancreatic_pbmc	2731	2270	1094	4140	1599	536
+pbmc_HemaCare-D273097	pancreatic_pbmc	2344	1623	721	3750	712	246
+pbmc_HemaCare-D270271	pancreatic_pbmc	2870	2298	1093	4147	1105	364
