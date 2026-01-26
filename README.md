@@ -47,12 +47,6 @@ All processing is performed **in memory**, and no intermediate files are written
 
 ---
 
-## Installation
-
-```bash
-pip install chromatin-bigwig-qc
-```
-
 ### Dependencies
 
 - pyBigWig
