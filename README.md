@@ -81,16 +81,21 @@ print(results[["collection_name", "experiment_name", "prediction"]])
 
 ### Peak-call files
 
-Peak files must contain the following tab-delimited columns:
+Peak-call files must be generated using **LanceOtron**. The framework assumes LanceOtron-style peak annotations and relies on several of its model-derived features to ensure consistent and biologically meaningful quality assessment.
 
-```
-chrom
-start
-end
-overall_peak_score
-shape_score
-enrichment_score
-```
+LanceOtron produces a tab-delimited, BED-like file containing the following columns:
+
+
+#### Column description (brief)
+- `chrom`, `start`, `end`: Genomic coordinates of the peak region  
+- `overall_peak_score`: LanceOtron confidence score for the peak  
+- `shape_score`: Measure of conformity to an expected accessibility peak shape  
+- `enrichment_score`: Signal enrichment relative to local background  
+- `max_coverage_position`: Genomic position of maximal signal within the peak  
+- `region_id`: Unique identifier for the peak region  
+- `pvalue_*`: P-values computed at increasing genomic scales, capturing local and broader background significance  
+
+Not all LanceOtron-derived columns are explicitly used in the current implementation of **chromatin-bigwig-qc**. However, users are expected to provide the complete, unfiltered LanceOtron output to ensure compatibility, reproducibility, and future extensibility of the framework.
 
 ---
 
@@ -113,10 +118,15 @@ enrichment_score
 
 ## License
 
-Specify license (e.g. MIT, BSD-3-Clause)
+GPL-3.0
 
 ---
 
 ## Citation
 
-Citation information to be added.
+If you use **chromatin-bigwig-qc** in your work, please cite the following preprint:
+
+> Riva, S. G., Venkatesh, S. S., Gür, E. R., Starnieri, N., Sergeant, M., Baxter, M., & Hughes, J. R.  
+> *CREST-GV: Cell types Ranking and Enrichment Score for selective Genetic Variants.*  
+> medRxiv, 2025.07.29.  
+> https://www.medrxiv.org/

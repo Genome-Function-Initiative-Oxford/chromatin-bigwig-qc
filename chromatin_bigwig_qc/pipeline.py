@@ -210,7 +210,9 @@ class ChromatinBigwigQC:
             df["prediction"] < 4754.02,
         ]
         labels = ["Good", "Decent", "Bad"]
-        df["qc_label"] = np.select(conditions, labels)
+        # df["qc_label"] = np.select(conditions, labels)
+        df["qc_label"] = np.select(conditions, np.array(labels, dtype=object), default="Unknown")
+
 
         # Return only the relevant columns
         return df[["prediction", "qc_label"]]
