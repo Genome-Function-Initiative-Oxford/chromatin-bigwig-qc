@@ -126,7 +126,7 @@ GPL-3.0
 
 If you use **chromatin-bigwig-qc** in your work, please cite the following preprint:
 
-> Riva, S. G., Venkatesh, S. S., Gür, E. R., Starnieri, N., Sergeant, M., Baxter, M., & Hughes, J. R.  
-> *CREST-GV: Cell types Ranking and Enrichment Score for selective Genetic Variants.*  
-> medRxiv, 2025.07.29.  
-> https://www.medrxiv.org/
+> Sanders, E., Riva, S. G., & Hughes, J. R.
+> *Learning quality scores for chromatin accessibility bigWig tracks using Machine Learning.*
+> bioRxiv, 2026.06.05.730303.
+> https://doi.org/10.64898/2026.06.05.730303
