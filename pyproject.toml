@@ -1,5 +1,5 @@
 [project]
-name = "bigwig-qc"
+name = "chromatin-bigwig-qc"
 version = "0.1.0"
 description = "Learning quality scores for chromatin accessibility bigWig tracks (Frontiers in AI submission)"
 readme = "README.md"
@@ -35,9 +35,9 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest"]
-# Needed for the E3 baselines/ablations experiment (todo.tex), not the core pipeline.
+# Needed for the E3 baselines/ablations experiment, not the core pipeline.
 baselines = ["lightgbm"]
-# Needed for the E7 mixed-effects variance-decomposition experiment (todo.tex), not the core pipeline.
+# Needed for the E7 mixed-effects variance-decomposition experiment, not the core pipeline.
 mixedlm = ["statsmodels"]
 
 [build-system]
