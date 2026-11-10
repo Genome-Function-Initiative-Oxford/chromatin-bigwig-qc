@@ -112,8 +112,8 @@ claimed to predict downstream statistical reliability.
   exact reproduction of it.
 - **LanceOtron version**: re-scored with whatever `lanceotron` module version
   is loaded at run time, which may differ from the version originally used to
-  produce `peaks_unfiltered/` in the parent repo - this is why the pipeline
-  always re-calls peaks on the `level=1.0` baseline too, rather than reusing
+  produce `peaks_unfiltered/` for the undegraded tracks - this is why the
+  pipeline always re-calls peaks on the `level=1.0` baseline too, rather than reusing
   the old peak calls, so every point in the dose-response curve is internally
   consistent.
 

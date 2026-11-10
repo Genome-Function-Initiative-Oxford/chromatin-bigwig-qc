@@ -7,7 +7,7 @@ different mount (or a local copy of the reference files) without code changes.
 import os
 from pathlib import Path
 
-_PROJECT_ROOT = Path("/ceph/project/Wellcome_Discovery/sriva/working_in_progress/Frontiers_QC_bw")
+_REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 def _env_path(var_name: str, default: str) -> Path:
@@ -36,10 +36,11 @@ REFSEQ_GTF = _env_path(
 )
 
 # Housekeeping gene list (GTEx sheet), PLOS Comp Biol 10.1371/journal.pcbi.1010295
-# supplementary table S014. Small and public; see data/README.md to vendor it locally.
+# supplementary table S014. Small and public; vendor it into data/external/ (see
+# data/README.md) or point BIGWIG_QC_HOUSEKEEPING_XLSX at a copy elsewhere.
 HOUSEKEEPING_GENES_XLSX = _env_path(
     "BIGWIG_QC_HOUSEKEEPING_XLSX",
-    str(_PROJECT_ROOT / "10_1371_journal_pcbi_1010295" / "pcbi.1010295.s014.xlsx"),
+    str(_REPO_ROOT / "data" / "external" / "pcbi.1010295.s014.xlsx"),
 )
 
 # Constant CTCF sites (recurrence across samples), from the CTCF_collection repo.

@@ -7,7 +7,7 @@ below). Genome-browser disagreement views not started.
 **Paper section:** Materials and Methods / Comparison with established QC
 metrics; Results / "Concordance with established QC metrics". New vs. CIBCB.
 
-## Ask (from `../../../paper_TODO/todo.tex`)
+## Ask
 
 - Compute, for every reprocessed track: TSS enrichment, FRiP (fraction of
   reads in peaks), fragment-length periodicity, NSC/RSC, and (for scATAC)

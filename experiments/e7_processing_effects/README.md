@@ -8,7 +8,7 @@ explicitly out of scope - see below.
 "Quality across collections and processing routes" (extends CIBCB Fig. 7).
 New vs. CIBCB.
 
-## Ask (from `../../../paper_TODO/todo.tex`), and what changed
+## Ask, and what changed
 
 The original ask had two parts: (1) reprocess a CATlas subset with CATCH-UP,
 or apply a common normalisation across collections, and re-score; (2) a

@@ -6,9 +6,9 @@ against E1's completed run.
 **Paper section:** Materials and Methods / Downstream utility; Results /
 "Quality-aware filtering improves downstream learning". New vs. CIBCB.
 
-## Ask (from `../../../paper_TODO/todo.tex`) and why it was redefined
+## Ask, and why it was redefined
 
-`todo.tex` suggests cell-type classification from accessibility at a fixed
+The original plan suggested cell-type classification from accessibility at a fixed
 peak set as *an example* downstream task, with settings: all tracks;
 score-filtered; randomly filtered to the same size; score-weighted.
 

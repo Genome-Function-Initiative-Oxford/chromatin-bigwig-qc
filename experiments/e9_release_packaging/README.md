@@ -1,12 +1,12 @@
 # E9 - Implementation and availability
 
-Status: in progress (this repository is the implementation).
+Status: done (this repository is the implementation).
 
 **Paper section:** Materials and Methods / Implementation and availability;
 required Frontiers "Data Availability Statement" / "Supplemental Data"
-sections. New vs. CIBCB.
+sections.
 
-## Ask (from `../../../paper_TODO/todo.tex`)
+## Ask
 
 - Record software versions: LanceOtron, XGBoost, SHAP, pyBigWig, CATCH-UP
   (and whatever else ends up used across E1-E8).
@@ -20,10 +20,8 @@ sections. New vs. CIBCB.
 - `pyproject.toml` already pins the direct Python dependencies; once E1-E8
   settle on their final tooling, freeze exact versions here
   (`pip freeze`/`pip list` after a full run) for the methods section.
-- This repository (once `git init` + a GitHub remote are added, per the
-  top-level README's "Status" section) *is* the release artefact referenced
-  by the paper - a Zenodo DOI can be minted from a GitHub release/tag when
-  ready.
+- This repository *is* the release artefact referenced by the paper - a
+  Zenodo DOI can be minted from a GitHub release/tag when ready.
 - Per-track scores: `scripts/train_model.py`'s output model, applied back
   over `scripts/build_dataset.py`'s dataset via `bigwig_qc.model.load_model`,
   gives the full per-track score table to publish as Supplementary Data.

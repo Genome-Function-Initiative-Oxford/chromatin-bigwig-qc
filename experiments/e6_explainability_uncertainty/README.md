@@ -8,7 +8,7 @@ degradation-calibrated quality-score thresholds. Results in `results/e6/`.
 Results / "Interpretation of the quality score". Partly reused from CIBCB
 (SHAP summary plot), partly new.
 
-## Ask (from `../../../paper_TODO/todo.tex`)
+## Ask
 
 - SHAP dependence and interaction value plots (beyond the CIBCB summary plot).
 - Conformal prediction intervals for the quality score.
