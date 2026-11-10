@@ -13,7 +13,7 @@ MAX_JOBS=60
 
 module load python-cbrg
 
-BIGWIG_FOLDERS="<path>"
+BIGWIG_FOLDERS="/project/Wellcome_Discovery/datashare/CREST-GV_collection"
 COLLECTION_NAMES=('H1_hESCs' 'catlas_fetal' 'CAD' 'immune_cell' 'MPAL' 'catlas_adult' 'ludwig2019' 'pancreatic_pbmc' 'super_PBMC' 'calderon' 'Days7_10_13_17')
 
 for collection_name in "${COLLECTION_NAMES[@]}"; do

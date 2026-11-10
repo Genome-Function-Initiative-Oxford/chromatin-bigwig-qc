@@ -10,7 +10,7 @@
 module load python-cbrg 
 
 MAX_JOBS=11
-PEAKS_FOLDERS="<path>"
+PEAKS_FOLDERS="/project/Wellcome_Discovery/datashare/CREST-GV_collection/peaks_unfiltered"
 COLLECTION_NAMES=('H1_hESCs' 'catlas_fetal' 'CAD' 'immune_cell' 'MPAL' 'catlas_adult' 'ludwig2019' 'pancreatic_pbmc' 'super_PBMC' 'calderon' 'Days7_10_13_17')
 
 for collection_name in "${COLLECTION_NAMES[@]}"; do
