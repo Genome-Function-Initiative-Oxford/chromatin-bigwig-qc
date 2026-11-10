@@ -48,7 +48,7 @@ def main():
     parser.add_argument("--output-dir", required=True, type=Path, help="Track hub destination directory")
     parser.add_argument(
         "--base-url", required=True,
-        help="Public base URL the output-dir is served at (e.g. https://datashare.molbiol.ox.ac.uk/public/project/Wellcome_Discovery/sriva/bw_qc_paper)",
+        help="Public base URL the output-dir is served at (e.g. https://example.org/public/bw_qc_hub)",
     )
     parser.add_argument("--hub-name", default="bigwig_qc_paper")
     args = parser.parse_args()

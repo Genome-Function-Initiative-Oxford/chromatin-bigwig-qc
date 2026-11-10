@@ -122,23 +122,18 @@ experiment.
 A number alone cannot be the final word on whether a scoring method is
 trustworthy - an expert looking directly at the signal is a stronger check
 than any statistic. Two separate UCSC Track Hubs (hg38) are built, one per
-script, so each can be linked and inspected independently:
+script, and published as saved UCSC Genome Browser sessions so each can be
+opened and inspected directly, with no manual hub-loading steps:
 
 - `build_track_hub.py`: all 30 ENCODE DNase-seq tracks, coloured by
   ENCODE's own audit tier, labelled with both the ENCODE tier and this
-  pipeline's own quantile-based quality label (see below). Published at:
-  ```
-  https://datashare.molbiol.ox.ac.uk/public/project/Wellcome_Discovery/sriva/bw_qc_hub_encode_dnase/hub.txt
-  ```
+  pipeline's own quantile-based quality label (see below). Open at:
+  [ENCODE DNase-seq, all 30 tracks](https://genome.ucsc.edu/s/simone.riva/ENCODE%20DNase%2Dseq%2C%20all%2030%20tracks)
 - `build_atac_reference_hub.py`: 15 real ATAC-seq tracks from the actual
   training data (3 per quality band), so the same visual check can be done
   on the pipeline's actual home turf, not just the DNase-seq transfer case.
-  Published at:
-  ```
-  https://datashare.molbiol.ox.ac.uk/public/project/Wellcome_Discovery/sriva/bw_qc_hub_atac_reference/hub.txt
-  ```
-
-(load either in UCSC Genome Browser via My Data > Track Hubs > My Hubs; genome hg38)
+  Open at:
+  [ATAC-seq training examples, 15 tracks](https://genome.ucsc.edu/s/simone.riva/ATAC%2Dseq%20training%20examples%2C%2015%20tracks)
 
 These also serve as a live, interactive alternative to a static
 genome-browser screenshot for the "visual inspection of representative
