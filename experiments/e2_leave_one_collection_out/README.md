@@ -5,8 +5,8 @@ collections, `pancreatic_pbmc` excluded - see below). Results in
 `results/e2_excl_pancreatic_pbmc/`. Not yet turned into paper figures.
 
 **Paper section:** Materials and Methods / Evaluation protocol; Results /
-"The quality score generalises across data collections". New vs. CIBCB
-(reuses CIBCB Fig. 5, predicted vs. observed, now with CIs).
+"The quality score generalises across data collections" (predicted vs.
+observed, with confidence intervals).
 
 ## Data: `pancreatic_pbmc` excluded
 
@@ -34,7 +34,7 @@ procedure's* sensitivity to the split, not what E2 asks).
 
 1. **`leave_one_collection_out`** - train on 10 collections, predict the
    11th, for every collection in turn. Tests generalisation to an entirely
-   unseen processing batch. Reuses/extends CIBCB Fig. 5.
+   unseen processing batch.
 2. **`repeated_group_kfold`** - collections repeatedly shuffled and split
    into 5 folds x 10 repeats, for confidence intervals on the aggregate
    metrics. Same question as (1), at a coarser group size (multiple
@@ -95,7 +95,7 @@ weak regime for hyperparameters tuned on ~470 rows) without further probing.
 ### 3: within-collection, the covariates do track real quality
 
 Pooled across all collections: R2=0.97, Spearman rho=0.97 [0.97, 0.98] -
-matching the original CIBCB random-split number. Once a collection's
+matching the original random-split number. Once a collection's
 batch/processing baseline is represented in training, the model recovers
 genuine track-to-track quality differences well.
 
@@ -143,8 +143,8 @@ Outputs (all gitignored, regenerate via the command above):
 
 ## Still to do
 
-- Figures: per-collection performance (extends CIBCB Fig. 5) and predicted
-  vs. observed with CIs - not yet built (no plotting code written for E2 yet).
+- Figures: per-collection performance and predicted vs. observed with CIs -
+  not yet built (no plotting code written for E2 yet).
 - Once E1 finishes and `results/model.json` is no longer being read live,
   decide whether to promote `model_excl_pancreatic_pbmc.json` to be the
   "real" `results/model.json`, and whether E1's seed tracks (which included 2

@@ -5,12 +5,11 @@ interaction plots, split conformal prediction intervals, and
 degradation-calibrated quality-score thresholds. Results in `results/e6/`.
 
 **Paper section:** Materials and Methods / Explainability and uncertainty;
-Results / "Interpretation of the quality score". Partly reused from CIBCB
-(SHAP summary plot), partly new.
+Results / "Interpretation of the quality score".
 
 ## Ask
 
-- SHAP dependence and interaction value plots (beyond the CIBCB summary plot).
+- SHAP dependence and interaction value plots (beyond the summary plot).
 - Conformal prediction intervals for the quality score.
 - Calibrated high/medium/low quality thresholds derived from the E1
   degradation series, rather than from visual inspection of score quantiles.
@@ -98,13 +97,13 @@ This connects directly to E2's finding (`total_bigwig_sum` and related
 features behave as a near-constant per-collection signature that transfers
 poorly across collections) - here it shows up again, from a different angle,
 as collection identity confounding a *global* quality threshold. The
-resulting 2-band split (`results/e6/quality_bands_p5.tsv`) agrees with the
-original CIBCB tertile-quantile approach only 59.4% of the time - the two
+resulting 2-band split (`results/e6/quality_bands_p5.tsv`) agrees with a
+simpler quantile-based tertile approach only 59.4% of the time - the two
 thresholding philosophies disagree substantially, not just at the margins.
 
 **Honest conclusion, not papered over**: a single, global, absolute
-quality-score threshold - whether quantile-based (CIBCB's original approach)
-or degradation-calibrated (this attempt) - cannot cleanly separate
+quality-score threshold - whether quantile-based or degradation-calibrated
+(this attempt) - cannot cleanly separate
 "genuinely good" from "genuinely degraded" tracks when collection identity
 itself explains much of the score's variance. A collection-relative or
 per-batch threshold (e.g.\ percentile within collection, or a threshold

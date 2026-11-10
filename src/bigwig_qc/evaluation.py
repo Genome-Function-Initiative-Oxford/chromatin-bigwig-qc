@@ -4,8 +4,8 @@ Three complementary evaluation schemes:
 
   - leave_one_collection_out: train on 10 collections, predict the 11th, for
     each of the 11 collections in turn - a test of generalisation to an
-    entirely unseen dataset/processing route (extends CIBCB Fig. 5, predicted
-    vs. observed, to the held-out-collection setting). This conflates two
+    entirely unseen dataset/processing route (predicted vs. observed, in the
+    held-out-collection setting). This conflates two
     things: whether the covariates predict genuine track-level quality, and
     whether the model can extrapolate across the batch/processing-depth
     differences between collections (see repeated collection analysis in

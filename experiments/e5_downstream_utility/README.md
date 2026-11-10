@@ -4,7 +4,7 @@ Status: **done**, including the score-vs-downstream-reliability correlation
 against E1's completed run.
 
 **Paper section:** Materials and Methods / Downstream utility; Results /
-"Quality-aware filtering improves downstream learning". New vs. CIBCB.
+"Quality-aware filtering improves downstream learning".
 
 ## Ask, and why it was redefined
 

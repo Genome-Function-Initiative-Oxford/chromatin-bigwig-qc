@@ -6,9 +6,8 @@ distribution used for the DNase-seq tracks there). This directly lets a
 human expert visually validate the core claim - do "good"/"excellent"
 tracks actually look clean, and "bad" ones actually look noisy? - rather
 than only checking the DNase-seq transfer result. Also serves as a live,
-interactive replacement for the "visual inspection of representative
-tracks" figure (CIBCB Fig. 8) the manuscript currently has no source
-graphics for.
+interactive alternative to a static screenshot for the "visual inspection
+of representative tracks" figure.
 """
 import argparse
 import shutil

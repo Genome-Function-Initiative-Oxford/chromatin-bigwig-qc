@@ -5,7 +5,7 @@ Status: **done** for the two metrics that are feasible without raw reads
 below). Genome-browser disagreement views not started.
 
 **Paper section:** Materials and Methods / Comparison with established QC
-metrics; Results / "Concordance with established QC metrics". New vs. CIBCB.
+metrics; Results / "Concordance with established QC metrics".
 
 ## Ask
 

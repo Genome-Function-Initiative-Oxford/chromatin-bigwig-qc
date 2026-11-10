@@ -5,8 +5,7 @@ Status: **partial, by deliberate scope decision.** The data-only half
 explicitly out of scope - see below.
 
 **Paper section:** Materials and Methods / Processing effects; Results /
-"Quality across collections and processing routes" (extends CIBCB Fig. 7).
-New vs. CIBCB.
+"Quality across collections and processing routes".
 
 ## Ask, and what changed
 

@@ -9,8 +9,8 @@ follows the expected quality gradient and any mismatch (e.g. a "warning"
 track sitting among "clean" ones, or a track ENCODE calls clean that this
 pipeline calls "bad") is easy to spot.
 
-Quality-label thresholds are equal-count quantiles (CIBCB's original
-approach) of the score distribution on the 490-track ATAC-seq dataset this
+Quality-label thresholds are equal-count quantiles of the score
+distribution on the 490-track ATAC-seq dataset this
 model was actually trained/evaluated on (--reference-dataset/
 --reference-model) - NOT re-derived from just these 30 DNase tracks, which
 would be circular (any small sample trivially splits into equal-sized bands

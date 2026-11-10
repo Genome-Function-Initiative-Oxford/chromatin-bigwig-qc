@@ -62,8 +62,8 @@ def compute_bigwig_features_from_handle(bw, peak_calls: pd.DataFrame) -> dict:
 
     return {
         "mean_peak_score": peak_calls.overall_peak_score.mean(),
-        # kept as in the CIBCB pipeline: computes the score median, not the peak
-        # length, despite the name - flagged in Frontiers_submission/README.md.
+        # kept as in the original pipeline: computes the score median, not the
+        # peak length, despite the name - preserved for numerical parity.
         "median_peak_length": peak_calls.overall_peak_score.median(),
         "mean_shape_score": peak_calls.shape_score.mean(),
         "mean_peak_length": peak_calls.length.mean(),

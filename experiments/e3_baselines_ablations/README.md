@@ -4,7 +4,7 @@ Status: **done** (baselines + feature-group ablations + significance tests).
 MACS3 ablation not implemented (see below). Results in `results/e3/`.
 
 **Paper section:** Materials and Methods / Evaluation protocol; Results /
-"Comparison with baselines and feature ablations". New vs. CIBCB.
+"Comparison with baselines and feature ablations".
 
 ## Method
 
@@ -66,9 +66,8 @@ unaffected by which link function is used.
 **Does the score add information beyond `n_peaks` alone?** Yes, clearly: the
 `n_peaks`-only linear baseline reaches R2=0.42 vs. the full model's 0.97, and
 XGBoost beats it with p=1.5e-7. Same for coverage alone (R2=0.36). This
-directly confirms, rather than just asserts (as the CIBCB paper does - "these
-[simple baselines] do not capture the multi-dimensional structure..."), that
-the learned score is not just a restatement of any single covariate.
+directly confirms, rather than just asserting it, that the learned score is
+not just a restatement of any single covariate.
 
 **XGBoost is not uniquely justified over other tree ensembles**: Random
 Forest and LightGBM are statistically indistinguishable from XGBoost
@@ -101,8 +100,9 @@ intended (always predicting the training mean).
 | without_peak_count | 0.9691 | -0.0037 | **0.043** (significant) |
 
 All effect sizes are small (R2 only ranges 0.969-0.973 across every ablation)
-- consistent with the CIBCB paper's own SHAP finding that no single feature
-group is individually indispensable; the model relies on combinations. Still,
+- consistent with the SHAP analysis (`e6_explainability_uncertainty`)
+finding that no single feature group is individually indispensable; the
+model relies on combinations. Still,
 `depth` (`total_bigwig_sum`) and `peak_count` (`n_peaks`/`n_peaks_0_5`/
 `n_peaks_0_95`) are the two groups whose removal causes a *statistically
 significant* drop, within this (easier, within-collection) evaluation scheme.

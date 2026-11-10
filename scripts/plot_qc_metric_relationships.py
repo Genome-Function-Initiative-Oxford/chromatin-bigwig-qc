@@ -1,13 +1,13 @@
 #!/usr/bin/env python
-"""CLI: reproduce CIBCB's Figs. 2-4 (background-noise distribution, positional
-promoter/CTCF recovery profiles) as one merged multi-panel figure for this
-manuscript, plus a correlation matrix between QC metrics (not in CIBCB).
+"""CLI: plot background-noise distribution and positional promoter/CTCF
+recovery profiles as one merged multi-panel figure for this manuscript, plus
+a correlation matrix between QC metrics.
 
 Panels:
 (a) Background noise (1 - percentage_coverage) distribution across all tracks.
 (b)/(c) Mean bigWig signal in bins around constant-promoter TSS / constant-CTCF
-    site midpoints, for a sample of tracks per quality tertile (CIBCB's
-    original equal-count quantile bands: bad/decent/good). Each track's
+    site midpoints, for a sample of tracks per quality tertile (equal-count
+    quantile bands: bad/decent/good). Each track's
     profile is normalised by that track's own total signal before averaging,
     since raw depth otherwise swamps the comparison (E7/E8 found this same
     depth confound). Profiles are centred on the reference interval's

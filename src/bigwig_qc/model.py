@@ -2,7 +2,7 @@
 
 Target: n_ctcf + n_promoters (constant-site recovery count).
 
-Reproduces the three-stage grid search from the CIBCB pipeline:
+Three-stage grid search:
   1) n_estimators / learning_rate
   2) max_depth / min_child_weight / gamma / subsample / colsample_bytree
   3) reg_alpha / reg_lambda

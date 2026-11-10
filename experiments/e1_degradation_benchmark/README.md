@@ -5,7 +5,7 @@ combinations across all 30 seed tracks, 11 collections. See "Results" below.
 
 **Paper section:** Materials and Methods / Controlled degradation benchmark
 (ground-truth validation); Results / "The quality score tracks controlled
-degradation". New vs. CIBCB.
+degradation".
 
 ## Method
 

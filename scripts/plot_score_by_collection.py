@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-"""CLI: plot the learned quality score's distribution by collection, a direct
-reproduction (on the current 490-track, pancreatic_pbmc-excluded dataset) of
-CIBCB's original Fig. 7 (score distribution by collection).
+"""CLI: plot the learned quality score's distribution by collection, on the
+current 490-track, pancreatic_pbmc-excluded dataset.
 """
 import argparse
 from pathlib import Path

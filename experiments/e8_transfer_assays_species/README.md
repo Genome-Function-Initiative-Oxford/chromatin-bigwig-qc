@@ -5,7 +5,7 @@ including a real negative-transfer finding and a live track hub for visual
 inspection. Mouse ATAC-seq half explicitly out of scope.
 
 **Paper section:** Results / "Transfer to other assays and species
-(optional)". New vs. CIBCB, marked optional in the roadmap.
+(optional)", marked optional in the roadmap.
 
 ## Ask, and what changed
 
@@ -17,9 +17,9 @@ generalisation beyond human hg38.
 resources (RefSeq GTF, a housekeeping-gene list, and a curated "constant CTCF
 sites" list) - the GTF and gene list are straightforward downloads, but the
 constant-CTCF list is not: the human one came from a separate modelling
-pipeline (`cibcb-r25-sanders2025ctcfcnn`) that is not reproducible here
-without that original work. This is a bigger, separate undertaking, not
-attempted.
+pipeline (a CNN-based classifier of constant vs. cell-type-specific CTCF
+sites) that is not reproducible here without that original work. This is a
+bigger, separate undertaking, not attempted.
 
 **DNase-seq was done, and it produced a real, concrete transfer finding** -
 not a messy null result, but a mechanistically-explained one.
@@ -140,11 +140,10 @@ script, so each can be linked and inspected independently:
 
 (load either in UCSC Genome Browser via My Data > Track Hubs > My Hubs; genome hg38)
 
-These also serve as a live, interactive replacement for the "visual
-inspection of representative tracks" section's original plan to reproduce
-CIBCB Fig.~8 (a static genome-browser screenshot) - this repository has no
-source graphics for that figure, but an interactive hub lets a reader
-inspect any locus, not just the one CIBCB happened to screenshot.
+These also serve as a live, interactive alternative to a static
+genome-browser screenshot for the "visual inspection of representative
+tracks" section - an interactive hub lets a reader inspect any locus, not
+just one fixed screenshot.
 
 ### Quality-label terminology
 

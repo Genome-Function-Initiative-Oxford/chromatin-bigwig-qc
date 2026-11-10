@@ -1,6 +1,6 @@
 """Derive high/medium/low quality-score thresholds from E1's degradation
 series, rather than from visual inspection of the score distribution's
-quantiles (the original CIBCB approach).
+quantiles.
 
 Method: E1's degradation grid gives two known-label reference populations by
 construction - tracks deliberately left undegraded (down_sample, level=1.0)
@@ -65,9 +65,9 @@ def derive_calibrated_thresholds(degradation_results: pd.DataFrame, percentile: 
 
 def quantile_thresholds(reference_scores: pd.Series, labels: list) -> list:
     """Interior cut points for an N-level, equal-COUNT quantile split of
-    `reference_scores` (CIBCB's original quality-banding approach - equal
-    population counts per band, not equal-width slices of the score range,
-    which would give wildly unequal band sizes on a skewed distribution).
+    `reference_scores` (equal population counts per band, not equal-width
+    slices of the score range, which would give wildly unequal band sizes on
+    a skewed distribution).
     Returns len(labels)-1 boundaries.
     """
     n = len(labels)

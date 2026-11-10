@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """CLI: derive calibrated high/medium/low quality-score thresholds from E1's
 degradation series (bigwig_qc.thresholds), rather than from visual
-inspection of the score distribution's quantiles (the original CIBCB
-approach), and apply them to the full 490-track dataset.
+inspection of the score distribution's quantiles, and apply them to the
+full 490-track dataset.
 """
 import argparse
 from pathlib import Path
@@ -36,7 +36,7 @@ def main():
     print(data.quality_band.value_counts().reindex(["low", "medium", "high"]).to_string())
 
     quantile_bands = pd.qcut(data.score, q=[0, 1 / 3, 2 / 3, 1], labels=["low", "medium", "high"])
-    print("\nBand counts, original CIBCB approach (tertile quantiles of the score distribution, for comparison):")
+    print("\nBand counts, a simpler quantile approach (tertile quantiles of the score distribution, for comparison):")
     print(quantile_bands.value_counts().reindex(["low", "medium", "high"]).to_string())
 
     agreement = (data.quality_band.astype(str) == quantile_bands.astype(str)).mean()
