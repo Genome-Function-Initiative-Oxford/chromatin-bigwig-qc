@@ -17,8 +17,8 @@ earlier codebase):
 
 ## Status
 
-Released: `.gitignore`, CI workflow, `LICENSE` (MIT), and `pyproject.toml`
-metadata are all in place, and the full test suite passes (86/86).
+Released: `.gitignore`, `LICENSE` (MIT), and `pyproject.toml` metadata are
+all in place, and the full test suite passes (86/86) via `pytest tests/`.
 
 ## Repository layout
 
