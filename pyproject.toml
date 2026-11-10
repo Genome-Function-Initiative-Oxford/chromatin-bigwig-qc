@@ -1,0 +1,48 @@
+[project]
+name = "bigwig-qc"
+version = "0.1.0"
+description = "Learning quality scores for chromatin accessibility bigWig tracks (Frontiers in AI submission)"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Edward Sanders", email = "edward.sanders@imm.ox.ac.uk" },
+    { name = "Jim R. Hughes", email = "jim.hughes@imm.ox.ac.uk" },
+    { name = "Simone G. Riva", email = "simone.riva@imm.ox.ac.uk" },
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pandas",
+    "numpy",
+    "pyBigWig",
+    "intervaltree",
+    # Pinned: all saved results/*.json models were produced with 1.7.5.
+    # XGBoost's sklearn wrapper changed how load_model() restores
+    # hyperparameters in later major versions - with xgboost>=2,
+    # load_model(...).get_params() silently returns None for every tuned
+    # hyperparameter (n_estimators, max_depth, etc.) instead of raising, so
+    # bigwig_qc.model.clean_hyperparams()-based retraining (used by E2/E3/E6)
+    # would silently fall back to library defaults rather than the tuned
+    # values. Confirmed via tests/test_model.py, which fails under
+    # xgboost>=2 and passes under 1.7.5.
+    "xgboost>=1.7,<2",
+    "shap",
+    "scikit-learn",
+    "seaborn",
+    "matplotlib",
+    "openpyxl",
+    "pyarrow",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+# Needed for the E3 baselines/ablations experiment (todo.tex), not the core pipeline.
+baselines = ["lightgbm"]
+# Needed for the E7 mixed-effects variance-decomposition experiment (todo.tex), not the core pipeline.
+mixedlm = ["statsmodels"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

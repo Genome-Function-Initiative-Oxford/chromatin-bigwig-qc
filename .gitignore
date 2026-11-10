@@ -1,0 +1,33 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Claude Code session data - not project content
+/.claude/
+/.claude-storage/
+
+# generated pipeline outputs - regenerate via scripts/, not tracked
+/results/
+/data/raw/
+/data/interim/
+
+# SLURM job artifacts (sbatch is always run from the repo root, so these land
+# here) - see scripts/slurm/*.sh's --output/--error and the cluster's CBB
+# profiling archives
+/*_*.out
+/*_*.err
+/sps-*.tar.gz
+/sps-*/
+
+# Overleaf-connected manuscript clone: its own separate git repo (nested
+# .git), not part of this code release - `git add -A` would otherwise stage
+# it as a broken gitlink with no .gitmodules entry.
+/6ac77ebc1875b4b182625346/
+
+# Accepted IEEE CIBCB 2026 camera-ready PDF - excluded pending a check of
+# the conference's copyright transfer agreement before public redistribution.
+/CIBCB2026/

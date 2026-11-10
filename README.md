@@ -1,0 +1,123 @@
+# bigwig-qc
+
+Learning quality scores for chromatin accessibility bigWig tracks.
+
+This repository is the working codebase for the Frontiers in AI submission
+("Computational Intelligence for Bioinformatics, Computational Biology, and
+Biomedical Informatics" research topic, deadline 2027-02-14), which extends
+the accepted IEEE CIBCB 2026 paper of the same core idea:
+
+> A neural-network peak-caller's recovery of cell-type-invariant ("constant")
+> promoters and CTCF sites is used as ground-truth quality signal for a
+> chromatin-accessibility bigWig track. An XGBoost regressor is trained to
+> predict that recovery from cheap bigWig/peak-call summary statistics, so a
+> track's quality can be scored without the constant-site annotation at
+> inference time.
+
+- CIBCB 2026 accepted paper: `../paper_TODO/2026210117.pdf`
+- Frontiers extension roadmap (source of the E1-E9 experiment list below):
+  `../paper_TODO/todo.tex`
+
+## Status
+
+Ready for release: `.gitignore`, CI workflow, `LICENSE` (MIT), and
+`pyproject.toml` metadata are all in place, and the full test suite passes
+(86/86). Adding a GitHub remote and pushing is the only thing left to do.
+
+## Repository layout
+
+```
+src/bigwig_qc/      installable package: the core, reusable pipeline code
+scripts/            thin CLIs around the package (SLURM-ready)
+scripts/slurm/       sbatch wrappers, mirroring the parent repo's run_*.sh
+notebooks/          exploratory notebooks (not the source of truth for the pipeline)
+experiments/         one folder per new experiment (E1-E9), see below
+tests/               unit tests for the package (no cluster data required)
+data/                README documenting external data dependencies
+```
+
+## Environment
+
+On the cluster, everything runs via the `python-cbrg` module (same as the
+parent CIBCB pipeline):
+
+```bash
+module load python-cbrg
+pip install -e .           # registers bigwig_qc as an importable package
+pip install -e ".[dev]"    # + pytest, for running tests/
+pip install -e ".[baselines]"  # + lightgbm, needed only for experiment E3
+```
+
+## Pipeline quickstart
+
+The three-stage pipeline from the CIBCB paper, refactored into `src/bigwig_qc/`
+and exposed as CLIs in `scripts/`:
+
+```bash
+# 1. Per-bigWig QC covariates (bigwig_qc.features)
+python scripts/run_features.py \
+    --input-bigwig path/to/sample.bw \
+    --input-peak-calls path/to/sample_L-tron.bed \
+    --output data/interim/features/<collection>.<sample>.json
+
+# 2. Constant promoter/CTCF recovery counts, i.e. the regression targets (bigwig_qc.references + bigwig_qc.targets)
+python scripts/run_targets.py \
+    --input path/to/collection/peak_calls_dir \
+    --output data/interim/targets/<collection>.tsv
+
+# 3. Join (1) and (2) into one modelling dataset (bigwig_qc.dataset)
+python scripts/build_dataset.py \
+    --summary-dir data/interim/features \
+    --targets-dir data/interim/targets \
+    --output data/interim/model_dataset.parquet
+
+# 4. Train + explain the quality-score model (bigwig_qc.model, bigwig_qc.explain)
+python scripts/train_model.py \
+    --dataset data/interim/model_dataset.parquet \
+    --model-output results/model.json \
+    --shap-output-stub results/shap_summary_plot
+```
+
+For the full 11-collection sweep, use the SLURM wrappers instead:
+`sbatch scripts/slurm/run_features.sh` then `sbatch scripts/slurm/run_targets.sh`.
+They set `PYTHONPATH` to `src/` themselves, so no local `pip install` is
+required to run them on the cluster.
+
+`data/` and `results/` are gitignored - they hold regenerated pipeline
+outputs, not source.
+
+## Provenance: CIBCB code -> this package
+
+The code was refactored (not copied) from the parent folder for clarity and
+testability; behaviour matches the CIBCB pipeline except where noted.
+
+| CIBCB source | Refactored into | Notes |
+|---|---|---|
+| `process_bigwig.py` (`summarise_data`) | `bigwig_qc/features.py` | Split into a handle-based pure function (`compute_bigwig_features_from_handle`) + a file-based wrapper, so it's unit-testable without a real `.bw` file. One field, `median_peak_length`, computes the *score* median (not peak length) in the original code - preserved as-is for numerical parity with CIBCB, flagged with a comment in `features.py`. |
+| `process_targets.py` (`load_genes`, `get_tree_constant_promoters`, `get_ctcf_tree`) | `bigwig_qc/references.py` | Split into pure tree-building functions (`build_promoter_tree_from_genes`, `build_ctcf_tree_from_peaks`) + file-loading wrappers, for the same testability reason. |
+| `process_targets.py` (`summarise_data`) | `bigwig_qc/targets.py` | Same promoter/CTCF overlap + threshold-count logic. |
+| `bigwig_quality.ipynb` (covariate/target loading cells) | `bigwig_qc/dataset.py` | Same `(experiment_name, collection_name)` join. |
+| `bigwig_quality.ipynb` (XGBoost grid-search cells) | `bigwig_qc/model.py` | Same 3-stage grid search (n_estimators/learning_rate -> tree structure -> regularisation), same `n_ctcf + n_promoters` target. |
+| `bigwig_quality.ipynb` (SHAP cell) | `bigwig_qc/explain.py` | Same `shap.TreeExplainer` summary plot. |
+| `analysis.ipynb` | not yet migrated | Downstream locus-level signal-recovery exploration; revisit if an E1/E6 experiment needs it. |
+
+## Experiments roadmap (from `../paper_TODO/todo.tex`)
+
+Each folder under `experiments/` corresponds to one new analysis required for
+the Frontiers extension and currently contains only a README stub describing
+the ask and a suggested starting point in `bigwig_qc`.
+
+| Folder | Paper section | Summary |
+|---|---|---|
+| `e1_degradation_benchmark` | Controlled degradation benchmark | **Done.** Full run: 900/900 (track, mode, level, seed) combinations across 30 seed tracks. Four real bugs found and fixed during debugging (XLA/`ptxas` crash, a masked `libdevice` error, a `bigwig_qc.bigwig_io` binning performance+correctness bug - ~11x speedup, exact not approximate, and a LanceOtron output-filename truncation bug on multi-dot degraded filenames) - see `scripts/slurm/run_e1_degradation.sh`'s header comment for the full history. Score shows a clean, strong, monotonic dose-response to `inject_noise` but is largely flat under `down_sample` except at the most extreme level. See its README for the full results and figure. |
+| `e2_leave_one_collection_out` | Evaluation protocol | **Done.** Leave-one-collection-out + repeated group k-fold + a within-collection stratified holdout (`bigwig_qc.evaluation`). Found `pancreatic_pbmc` has experimental problems (excluded from `config.COLLECTION_NAMES`); found cross-collection generalisation is unreliable for several small/differently-processed collections (batch/depth confound, not a covariate-quality failure - confirmed within-collection R2/rho ~0.97 once the batch is represented). See its README for full findings. |
+| `e3_baselines_ablations` | Evaluation protocol | **Done.** Baselines (mean/linear/ElasticNet/RF/LightGBM/MLP) + feature-group ablations, with corrected resampled t-tests (`bigwig_qc.baselines`). XGBoost beats simple baselines (p<0.001) but is statistically indistinguishable from Random Forest/LightGBM; `depth`/`peak_count` feature groups are the only ones whose removal is significant - connects to E2's batch-confound finding. MACS3 ablation blocked (no MACS3 peak calls in this repo). See its README. |
+| `e4_qc_concordance` | Comparison with established QC metrics | **Done** (for the 2 metrics feasible without raw reads). TSS enrichment (independent of the training target) correlates with the learned score at Spearman rho=0.86 (p=5e-142); FRiP (a training feature) at rho=0.73. NSC/RSC and fragment-length periodicity blocked (need raw reads). Genome-browser disagreement views not started. See its README. |
+| `e5_downstream_utility` | Downstream utility | **Done.** Redefined away from `todo.tex`'s cell-type-classification example (rejected by the user - doesn't match what they'd actually use to validate this, and the first candidate collection had 1 track/cell-type anyway): tests whether low-quality tracks produce unreliable *statistical* conclusions (`bigwig_qc.open_chromatin_test` - local-background Poisson enrichment test, statistical power/false-positive rate at true-positive constant CTCF/promoter sites and true-negative background loci, across E1's degradation grid). Full 900-row run complete: `inject_noise` (not `down_sample`) inflates FPR substantially above baseline at every severity tested, while power stays flat - the real "garbage in, garbage out" failure mode. Joined against E1's scores: score strongly predicts power/FPR within `down_sample` (rho=0.80) but not within `inject_noise` (rho~0.08-0.10, n.s.) - an important caveat on how well the score predicts downstream reliability specifically. Baseline FPR (0.18) is also substantially above nominal alpha=0.05, a flagged limitation of the test's calibration. See its README for full results. |
+| `e6_explainability_uncertainty` | Explainability and uncertainty | **Done.** SHAP dependence/interaction plots (`n_peaks` x `mean_enrichment_score` is the top-interacting pair); split conformal prediction intervals (89.8%/81.6% empirical coverage at 90%/80% nominal - well calibrated); degradation-calibrated quality thresholds from E1, which collapse to a 2-band (not 3-band) split because collection identity confounds a global threshold as much as degradation severity does - connects directly to E2's batch-confound finding, agrees with CIBCB's original tertile-quantile bands only 59% of the time. See its README. |
+| `e7_processing_effects` | Processing effects | **Partial, by decision.** Reprocessing/renormalisation deliberately out of scope (most collections are bigwig-only; reprocessing a large published collection is often infeasible). Variance-decomposition (mixed-effects model, `score ~ 1 + (1\|collection)`) done: ICC=0.498 - collection identity alone explains ~half the score's total variance, quantifying what E2/E6 found qualitatively. See its README. |
+| `e8_transfer_assays_species` | Transfer to other assays/species (optional) | **Partial, by decision.** Mouse ATAC-seq out of scope (needs a from-scratch constant-CTCF reference). DNase-seq done: 30 real ENCODE tracks scored, finding a genuine negative-transfer result - `mean_peak_score`/`percentage_coverage` correctly track ENCODE's own audit severity (Spearman rho=-0.78/-0.59) but the overall score fails because `n_peaks` moves the *wrong* direction on low-quality DNase tracks (rho=+0.62); also found a large cross-pipeline normalisation confound (ENCODE's depth-normalisation clamps `total_bigwig_sum` to ~150K vs. our data's 1M-191M range). Built a live UCSC track hub (30 DNase + 15 ATAC reference tracks, labelled by both ENCODE's tier and this pipeline's own quantile-based quality label) for direct visual inspection. See its README. |
+| `e9_release_packaging` | Implementation and availability | Software versions, package release, GitHub repo + Zenodo DOI. |
+
+See `data/README.md` for the external (cluster-only) data paths the pipeline
+depends on.
