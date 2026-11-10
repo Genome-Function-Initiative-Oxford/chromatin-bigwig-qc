@@ -1,5 +1,7 @@
 # chromatin-bigwig-qc
 
+[![PyPI version](https://img.shields.io/pypi/v/chromatin-bigwig-qc.svg)](https://pypi.org/project/chromatin-bigwig-qc/)
+
 Learning quality scores for chromatin accessibility bigWig tracks.
 
 This repository is the codebase for a Frontiers in Artificial Intelligence
